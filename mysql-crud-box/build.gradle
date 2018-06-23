@@ -1,0 +1,24 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'com.github.muriloaj'
+version = '1.0-SNAPSHOT'
+
+description = """apache-spark-mysql-crud"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+
+
+repositories {
+        mavenCentral()
+        jcenter()
+}
+dependencies {
+    compile 'com.sparkjava:spark-core:2.7.2'
+    testCompile 'junit:junit:4.12'
+}
