@@ -1,0 +1,50 @@
+{
+    "version": "3.1",
+    "volumes": {
+        "mysql-data": null
+    },
+    "services": {
+        "db-mysql": {
+            "image": "mysql:8.0.11",
+            "container_name": "empty_mysql",
+            "restart": "always",
+            "env_file": "envlist-repo/mysql.properties",
+            "ports": [
+                "3306:3306"
+            ],
+            "volumes": [
+                "mysql-data:/var/lib/mysql"
+            ],
+            "networks": [
+                "default",
+                "emptybox_network"
+            ]
+        },
+        "db-adminer": {
+            "image": "adminer:4.6.2-standalone",
+            "container_name": "empty_adminer",
+            "restart": "always",
+            "links": [
+                "db-mysql:mysql"
+            ],
+            "depends_on": [
+                "db-mysql"
+            ],
+            "ports": [
+                "3386:8080"
+            ],
+            "volumes": [
+                "mysql-data:/var/lib/mysql"
+            ],
+            "networks": [
+                "default",
+                "emptybox_network"
+            ]
+        }
+    },
+    "networks": {
+        "emptybox_network": {
+            "external": true
+        }
+    }
+}
